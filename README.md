@@ -1,2 +1,2 @@
-# see-how
-Designed to control things using computer vision 📷
+# see-how Develop
+Feel free to change and optimize anything here
