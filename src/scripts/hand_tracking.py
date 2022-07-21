@@ -1,7 +1,7 @@
 from turtle import pos
 import cv2 as cv
 import mediapipe as mp
-from api_request import FireRise 
+#from api_request import FireRise 
 
 class handDetector():
     # Parameters
@@ -109,10 +109,10 @@ class handDetector():
         return tracking.handFingers
 
     # Send data to api 
-    def sendToApi(tracking):
+    """ def sendToApi(tracking):
         api = FireRise("https://myhand-ff333-default-rtdb.firebaseio.com/", tracking.fingers)
         api.putData("mao", True, None, tracking.fingers)
-
+ """
 
 def videoCapture():
     # Camera capture
