@@ -1,3 +1,4 @@
+from turtle import right
 import cv2 as cv
 import mediapipe as mp
 #from api_request import FireRise 
@@ -153,10 +154,15 @@ def videoCapture():
         num = tracking.labelText()
 
         if success:
-            font = cv.FONT_HERSHEY_COMPLEX
+            font     = cv.FONT_HERSHEY_COMPLEX
+            left     = (50,50)
+            right    = (380, 50)
 
             if tracking.countFingers > 0:
-                cv.putText(frame, num, (50,50), font, 1, (0,0,255), 2)
+                if tracking.label == 'Left':
+                    cv.putText(frame, num, left, font, 1, (0,0,255), 2)
+                else:
+                     cv.putText(frame, num, right, font, 1, (0,0,255), 2)
 
             cv.imshow('Frame', frame)
             key = cv.waitKey(1)
