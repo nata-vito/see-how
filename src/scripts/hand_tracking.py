@@ -1,4 +1,3 @@
-from turtle import right
 import cv2 as cv
 import mediapipe as mp
 #from api_request import FireRise 
