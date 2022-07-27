@@ -24,30 +24,16 @@ def videoCapture():
 
         # Hand's contour
         contour         = tracking.findHands(frame)
-        pose            = tracking.findPosition(frame)
         i              += 1
 
-        if len(pose) != 0:
-            print(pose[4], pose[8])
-
-            x1, y1 = pose[4][1], pose[4][2]                             # Thumb tip cicle
-            x2, y2 = pose[8][1], pose[8][2]                             # Index tip circle
-            cx, cy = (x1 + x2) // 2, (y1 + y2) //2                      # Middle circle
-
-            cv.circle(frame, (x1, y1), 10, (255, 0, 255), cv.FILLED)
-            cv.circle(frame, (x2, y2), 10, (255, 0, 255), cv.FILLED)
-            cv.line(frame, (x1, y1), (x2,y2), (255,0,255), 3)
-            cv.circle(frame, (cx, cy), 10, (255, 0, 255), cv.FILLED)
-
-            length = math.hypot(x2-x1, y2-y1)
-            length = np.interp(length, [30, 230], [0, 100])
-
-            if length < 20:
-                cv.circle(frame, (cx, cy), 10, (0, 255, 0), cv.FILLED)
-            print(length)
+        tracking.findPosition(frame)    # Getting positional landmarks points
+        level = tracking.levelOutput(frame)
+        
+        if level:
+            print(level)
 
         # Detection and decosntruction of List to String
-        tracking.handsLabel(pose, ids)
+        tracking.handsLabel(tracking.lmList, ids)
         num = tracking.labelText()
 
         if success:
