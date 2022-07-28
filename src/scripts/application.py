@@ -1,6 +1,5 @@
-import math 
 import cv2 as cv
-import numpy as np
+from libcst import RightShift
 import hand_tracking as ht
 
 def videoCapture():
@@ -24,7 +23,7 @@ def videoCapture():
 
         # Hand's contour
         contour         = tracking.findHands(frame)
-        i              += 1
+        i              += 1 
 
         tracking.findPosition(frame)    # Getting positional landmarks points
         level = tracking.levelOutput(frame)
@@ -39,13 +38,18 @@ def videoCapture():
         if success:
             font     = cv.FONT_HERSHEY_COMPLEX
             left     = (50,50)
+            leftSt   = (50, 80)
             right    = (380, 50)
+            rightSt  = (380, 80)
+            level    = str(level) + '%'
 
             if tracking.countFingers > 0:
                 if tracking.label == 'Left':
-                    cv.putText(frame, num, left, font, 1, (0,0,255), 2)
+                    cv.putText(frame, num, left, font, 1, (255,0,0), 2)
+                    cv.putText(frame, level, leftSt, font, 1, (255,0,0), 2)
                 else:
-                     cv.putText(frame, num, right, font, 1, (0,0,255), 2)
+                     cv.putText(frame, num, right, font, 1, (255,0,0), 2)
+                     cv.putText(frame, level, rightSt, font, 1, (255,0,0), 2)
 
             cv.imshow('Frame', frame)
             key = cv.waitKey(1)

@@ -78,7 +78,7 @@ class handDetector():
             cv.circle(frame, (cx, cy), 10, (255, 0, 255), cv.FILLED)
 
             self.length = math.hypot(x2-x1, y2-y1)
-            self.length = np.interp(self.length, [30, 230], [0, 100])
+            self.length = int(np.interp(self.length, [30, 230], [0, 100]))
 
             if self.length < 20:
                 cv.circle(frame, (cx, cy), 10, (0, 255, 0), cv.FILLED)
